@@ -34,7 +34,10 @@ const RestLogin = ({ className, ...rest }) => {
                             })
                             .then(function (response) {
                                 if (response.data.success) {
-                                    console.log(response.data);
+                                    const isOnboarding = localStorage.getItem('isOnboarding');
+                                    if (!isOnboarding && isOnboarding !=='done') {
+                                        localStorage.setItem('isOnboarding', 1)
+                                    }
                                     dispatcher({
                                         type: ACCOUNT_INITIALIZE,
                                         payload: { isLoggedIn: true, user: response.data.user, token: response.data.token }

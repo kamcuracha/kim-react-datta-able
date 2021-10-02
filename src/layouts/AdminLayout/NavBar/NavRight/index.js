@@ -8,6 +8,7 @@ import axios from 'axios';
 import ChatList from './ChatList';
 import { API_SERVER } from '../../../../config/constant';
 import { LOGOUT } from './../../../../store/actions';
+import Modal from '../../../../components/Modal/Modal';
 
 import avatar1 from '../../../../assets/images/user/avatar-1.jpg';
 import avatar2 from '../../../../assets/images/user/avatar-2.jpg';
@@ -17,8 +18,10 @@ import avatar4 from '../../../../assets/images/user/avatar-4.jpg';
 const NavRight = () => {
     const account = useSelector((state) => state.account);
     const dispatcher = useDispatch();
+    const isOnboarding = localStorage.getItem('isOnboarding');
 
     const [listOpen, setListOpen] = useState(false);
+    const [modalShow, setModalShow] = useState(['1', '2', '3', '4'].includes(isOnboarding) && true);
 
     const handleLogout = () => {
         axios
@@ -38,7 +41,16 @@ const NavRight = () => {
 
     return (
         <React.Fragment>
+            <Modal
+                show={modalShow}
+                onHide={() => setModalShow(false)}
+            />
             <ListGroup as="ul" bsPrefix=" " className="navbar-nav ml-auto" id="navbar-right">
+                <ListGroup.Item as="li" bsPrefix=" " className="nav-item">
+                    <a href="javascript:void(0)"  onClick={() => setModalShow(!modalShow)}>
+                        <i className="icon feather icon-alert-circle" />
+                    </a>
+                </ListGroup.Item>
                 <ListGroup.Item as="li" bsPrefix=" ">
                     <Dropdown>
                         <Dropdown.Toggle as={Link} variant="link" to="#" id="dropdown-basic">
