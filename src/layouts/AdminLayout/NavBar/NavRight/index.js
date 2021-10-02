@@ -18,10 +18,10 @@ import avatar4 from '../../../../assets/images/user/avatar-4.jpg';
 const NavRight = () => {
     const account = useSelector((state) => state.account);
     const dispatcher = useDispatch();
-    const isOnboarding = localStorage.getItem('isOnboarding');
+    const stepOnboarding = localStorage.getItem('stepOnboarding');
 
     const [listOpen, setListOpen] = useState(false);
-    const [modalShow, setModalShow] = useState(['1', '2', '3', '4'].includes(isOnboarding) && true);
+    const [modalShow, setModalShow] = useState(['1', '2', '3', '4'].includes(stepOnboarding) && true);
 
     const handleLogout = () => {
         axios
@@ -43,6 +43,7 @@ const NavRight = () => {
         <React.Fragment>
             <Modal
                 show={modalShow}
+                step={stepOnboarding}
                 onHide={() => setModalShow(false)}
             />
             <ListGroup as="ul" bsPrefix=" " className="navbar-nav ml-auto" id="navbar-right">

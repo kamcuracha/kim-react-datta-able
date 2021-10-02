@@ -34,9 +34,9 @@ const RestLogin = ({ className, ...rest }) => {
                             })
                             .then(function (response) {
                                 if (response.data.success) {
-                                    const isOnboarding = localStorage.getItem('isOnboarding');
-                                    if (!isOnboarding && isOnboarding !=='done') {
-                                        localStorage.setItem('isOnboarding', 1)
+                                    const stepOnboarding = localStorage.getItem('stepOnboarding');
+                                    if (!stepOnboarding && stepOnboarding !=='done') {
+                                        localStorage.setItem('stepOnboarding', 1)
                                     }
                                     dispatcher({
                                         type: ACCOUNT_INITIALIZE,
