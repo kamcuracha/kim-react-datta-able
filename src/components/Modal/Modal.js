@@ -4,7 +4,8 @@ import { Button, Modal as BSModal }  from 'react-bootstrap';
 import { STEPS } from '../../enum/steps';
 
 const Modal = (props) => {
-  const [step, setStep] = useState(props.step);
+  const stepOnboarding = localStorage.getItem('stepOnboarding');
+  const [step, setStep] = useState(!stepOnboarding || stepOnboarding ==='done' ? '1' : props.step);
   // const percentage = ['1', '2', '3', '4'].includes(props.step) && ((props.step / 4) * 100);
 
   const saveStep = (value) => {

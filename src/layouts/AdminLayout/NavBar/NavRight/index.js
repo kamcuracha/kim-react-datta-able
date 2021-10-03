@@ -21,7 +21,17 @@ const NavRight = () => {
     const stepOnboarding = localStorage.getItem('stepOnboarding');
 
     const [listOpen, setListOpen] = useState(false);
+    const [step, setStep] = useState(stepOnboarding);
     const [modalShow, setModalShow] = useState(['1', '2', '3', '4'].includes(stepOnboarding) && true);
+
+    const handleModal = () => {
+        const stepOnboarding = localStorage.getItem('stepOnboarding');
+        if (stepOnboarding ==='done') {
+            localStorage.setItem('stepOnboarding', '1');
+            setStep('1');
+        }
+        setModalShow(!modalShow);
+    }
 
     const handleLogout = () => {
         axios
@@ -42,13 +52,13 @@ const NavRight = () => {
     return (
         <React.Fragment>
             <Modal
+                step={step}
                 show={modalShow}
-                step={stepOnboarding}
                 onHide={() => setModalShow(false)}
             />
             <ListGroup as="ul" bsPrefix=" " className="navbar-nav ml-auto" id="navbar-right">
                 <ListGroup.Item as="li" bsPrefix=" " className="nav-item">
-                    <a href="javascript:void(0)"  onClick={() => setModalShow(!modalShow)}>
+                    <a href="javascript:void(0)" onClick={handleModal}>
                         <i className="icon feather icon-alert-circle" />
                     </a>
                 </ListGroup.Item>
